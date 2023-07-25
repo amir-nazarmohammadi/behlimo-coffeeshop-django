@@ -1,0 +1,76 @@
+
+{% load static %}
+
+
+
+<header>
+
+    <div class="fixed-top">
+        <div class="navbar-area navbar-dark">
+
+            <div class="mobile-nav">
+                <a href="{% url 'menu' %}" class="mobile-brand">
+                    <img src="{% static 'images/logo1.png' %}" alt="logo" class="blue-logo">
+                </a>
+
+                <div class="navbar-option d-flex align-items-center">
+                    <div class="navbar-option-item navbar-option-dots mobile-hide">
+
+                        </button>
+  
+                    </div>
+
+                          
+                    <div class="navbar-option-item navbar-option-cart">
+                        <a href="{% url 'cart' %}" class="productCart">
+                            <a href="{% url 'cart' %}" >  <i class="flaticon-supermarket-basket"></i></a></a>
+                        <span class="option-badge">{{cart_count}}</span>
+                    </div>
+
+                    <div class="navbar-option-item navbar-option-order mobile-block">
+                        <a href="shops-grid.html" class="btn">
+                            <i class="flaticon-shopping-cart-black-shape"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-nav">
+                <div class="container">
+                    <nav class="navbar navbar-expand-md navbar-light">
+                        <a class="navbar-brand" href="{% url 'menu' %}">
+                            <img src="{% static 'images/logo1.png' %}" alt="logo" class="logo">
+                        </a>
+
+                        <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
+                            <ul class="navbar-nav ms-auto">
+                 
+                                <li class="nav-item">
+                                    <a href="{% url 'menu' %}" class="nav-link">منو</a>
+                                  
+                                        <li class="nav-item">
+                                            <a href="{% url 'aboutus' %}" class="nav-link">درباره ما</a>
+                                        </li>
+
+                                <li class="nav-item">
+                                    <a href="{% url 'contactus' %}" class="nav-link">تماس با ما</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                            <div class="navbar-option-item navbar-option-cart">
+                                <a href="{% url 'cart' %}" class=""><i class="flaticon-supermarket-basket"></i></a>
+                                <span class="option-badge">{{cart_count}}</span>
+                            </div>
+
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</header>
+
+
+

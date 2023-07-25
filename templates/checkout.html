@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="checkout-section pt-100 pb-70 bg-black">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-7 col-lg-8 pb-30">
+                <div class="checkout-item">
+                    <div class="sub-section-title">
+                        <h3 class="color-white">پرکردن اطلاعات </h3>
+                    </div>
+                    <div class="checkout-form">
+                        <form action="{% url 'place_order' %}" method="POST">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="form-group mb-20">
+                                        <div class="input-group">
+                                            <input type="text" name="customer_name" class="form-control" required placeholder=" نام و نام خانوادگی *" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12">
+                                    <div class="form-group mb-20">
+                                        <h4 style="color: white;">میز خود را انتخاب کنید</h4>
+                                        <div class="input-group">
+                                            <select name="table" class="form-control">
+                                               
+                                                {% for table in tabels %}
+                                                    <option value="{{ table.id }}">{{ table.name }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <button class="btn full-width"> تکمیل خرید و سفارش </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-5 col-lg-4 pb-30">
+                <div class="checkout-item">
+                    <div class="checkout-details cart-details mb-30">
+                        <h3 class="cart-details-title color-white">جدول خرید</h3>
+                        <div class="cart-total-box">
+                            {% for cart_item in cart_items %}
+                            
+                            <div class="cart-total-item pt-0">
+                                <h4 style="color: yellow;">{{cart_item.menu.titel}}</h4>
+                                <p>{{cart_item.quantity}}</p>
+                                <p>{{cart_item.sub_total}}</p>
+                            </div>
+                            {% endfor %}
+
+                            <div class="cart-total-item cart-total-bold">
+                                <h4 class="color-white">جمع هزینه</h4>
+                                <p>{{total}}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}
+</body>
+
+</html>

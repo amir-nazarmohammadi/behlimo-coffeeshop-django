@@ -1,0 +1,213 @@
+{% extends 'base.html' %}
+{% load poll_extras %}
+{% load static %}
+{% block content %}
+
+
+
+<div class="header-bg header-bg-page">
+    <div class="header-padding position-relative">
+        <div class="header-page-shape">
+            <div class="header-page-shape-item">
+                <img src="{% static 'images/header-shape-1.png' %}" alt="shape">
+            </div>
+            <div class="header-page-shape-item">
+                <img src="{% static 'images/header-shape-2.png' %}" alt="shape">
+            </div>
+            <div class="header-page-shape-item">
+                <img src="{% static 'images/header-shape-3.png' %}" alt="shape">
+            </div>
+            <div class="header-page-shape-item">
+                <img src="{% static 'images/header-shape-1.png' %}" alt="shape">
+            </div>
+            <div class="header-page-shape-item">
+
+            </div>
+            <div class="header-page-shape-item">
+                <img src="{% static 'images/header-shape-1.png' %}" alt="shape">
+            </div>
+            <div class="header-page-shape-item">
+
+            </div>
+        </div>
+        <div class="container">
+            <div class="header-page-content">
+                <h1>کافه به لیمو</h1>
+ 
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<section class="menu-section bg-dark p-tb-100">
+    <div class="container position-relative">
+        <div class="section-title">
+            <small>منو غذایی</small>
+            <h2 class="color-white">غذای مورد نظر را انتخاب کنید</h2>
+        </div>
+        
+        
+        <div class="menu-main-carousel-area">
+            
+            <div class="menu-main-thumb-nav">
+                <div class="menu-main-thumb-item menu-main-thumb-black">
+                    <div class="menu-main-thumb-inner">
+                        <a href="{% url 'menu' %}">  <img src="{{category.image.url}}" alt="menu">
+                        <p>همه آیتم ها</p> </a>
+                    </div>
+                </div>
+                {% for category in links  %}
+                <div class="menu-main-thumb-item menu-main-thumb-black">
+                    <div class="menu-main-thumb-inner">
+                        <a href="{{ category.get_url }}">  <img src="{{category.image.url}}" alt="menu">
+                        <p>{{category.titel}}</p> </a>
+                    </div>
+                </div>
+                
+                {% endfor %}
+                
+
+               
+            </div>
+            <br>
+            <br>
+            <br>
+            <div class="">
+                
+                <div class="sidebar-item around-border sidebar-search">
+                    <form action="{% url 'search' %}" method ='GET' >
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="جستجو" name='keyword'>
+                            <button><i class="flaticon-loupe"></i></button>
+                        </div>
+                    </form>
+                  
+                </div>
+                <p>  مشاهد تمامی آیتم های ما:  {{items_count}}</p>
+            <br>
+            <br>
+            <br>
+<div class="container">
+    <div class="row mx-0">
+        {% for item in items %}
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="card bg-light text-black" style="height: 100%; text-align: center;">
+                <a href="{{item.get_url}}"> <img src="{{item.image.url}}" class="card-img-top img-fluid" style="object-fit: cover; height: 200px;" alt="..."></a>
+                <div class="card-body">
+                   <a href="{{item.get_url}}" style="color: black;"> <h5 class="card-title mb-3" style="font-weight: bold; font-size: 1.25rem;">{{item.titel}}</h5> </a>
+                    {% if item.is_available > 0  %}
+                    <p class="card-text fs-5" style="color: red;font-size: 1.2rem;">{{item.price|comma_seprator}} تومان</p>
+                    <a href="{% url 'add_cart' item.id %}" class="btn btn-primary"><i class="flaticon-supermarket-basket"></i> افزودن به سبد خرید</a>
+                    {% else %}
+                    <p class="card-text fs-5" style="color: red; font-size: 1.2rem;">در حال حاضر موجود نمی باشد</p>
+                {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<br>
+<div class="page-pagination">
+    <nav aria-label="pagination">
+        {% if items.has_other_pages  %}
+            <ul class="pagination justify-content-center">
+            {% if items.has_previous %}
+            <a href="?page={{items.previous_page_number}}">
+                <li class="page-item">
+                    <span class="page-link"><i class="flaticon-left-arrow-1"></i></span>
+                </li>
+            </a>
+            {% else %}
+                <li class="page-item disabled">
+                    <span class="page-link" ><i class="flaticon-left-arrow-1"></i></span>
+                </li>
+            {% endif %}
+            {% for i in items.paginator.page_range  %}
+                {% if items.number == i %}
+                    <li class="page-item active"><a class="page-link" href="#">{{i}}</a></li>
+                {% else %}
+                    <li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
+                {% endif %}
+                
+            {% endfor %}
+            {% if items.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{items.next_page_number}}"><i class="flaticon-next"></i></a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" href=""><i class="flaticon-next"></i></a>
+            </li>
+            {% endif %}
+        </ul>
+        {% endif %}
+    </nav>
+</div>
+        </section>
+                    
+
+
+
+        <section class="subscribe-section mural-bg pt-100 pb-70 bg-main">
+            <div class="container">
+                <div class="subscribe-grid">
+                    <div class="subscribe-item">
+                        <div class="section-title text-center text-lg-start m-0">
+                            <h2 class="color-white">عضویت در باشگاه مشتریان </h2>
+                            <p>با عضویت در باشگاه مشتریان از تخفیفات و برنامه های ویژه ما با خبر شوید.</p>
+                        </div>
+                    </div>
+                    <div class="subscribe-item">
+                        <div class="subscribe-form">
+                            <form class="" data-bs-toggle="validator" method="POST" action="{% url 'register_customer' %}">
+                                
+                                {% csrf_token %}
+                                
+                                <div class="form-group mb-3">
+                                    <div class="input-group">
+                                        <input type="text" id="full_name" class="form-control" placeholder="* نام و نام خانوادگی خود را وارد کنید" name="full_name" style="color: black;" >
+                                    </div>
+                                </div>
+                                <div class="form-group mb-0">
+                                    <div class="input-group">
+                                        <input type="text" id="phone_number" class="form-control" placeholder="* موبایل خود را وارد کنید" name="phone_number" style="color: black;">
+                                    </div>
+                                </div>
+                                <br>
+                                <button class="btn btn-yellow" type="submit">عضویت <i class="flaticon-right-arrow-sketch-1"></i></button>
+                                <div id="validator-newsletter" class="form-result color-white"></div>
+                            </form>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        
+
+
+               
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="scroll-top" id="scrolltop">
+        <div class="scroll-top-inner">
+            <span><i class="flaticon-up-arrow"></i></span>
+        </div>
+    </div>
+
+
+
+    {% endblock content %}
+</body>
+
+<!-- Mirrored from hezarpart.ir/HTML/fafo/shops-grid.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 14 Dec 2022 19:10:04 GMT -->
+</html>

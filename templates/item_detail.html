@@ -1,0 +1,207 @@
+{% extends 'base.html' %}
+{% load poll_extras %}
+{% load static %}
+{% block content %}
+
+<div class="header-bg header-bg-page">
+    <div class="header-padding position-relative">
+        <div class="header-page-shape">
+            <div class="header-page-shape-item">
+                <img src="{% static 'images/header-shape-1.png' %}" alt="shape">
+            </div>
+            <div class="header-page-shape-item">
+                <img src="{% static 'images/header-shape-2.png' %}" alt="shape">
+            </div>
+            <div class="header-page-shape-item">
+                <img src="{% static 'images/header-shape-3.png' %}" alt="shape">
+            </div>
+            <div class="header-page-shape-item">
+                <img src="{% static 'images/header-shape-1.png' %}" alt="shape">
+            </div>
+            <div class="header-page-shape-item">
+
+            </div>
+            <div class="header-page-shape-item">
+                <img src="{% static 'images/header-shape-1.png' %}" alt="shape">
+            </div>
+            <div class="header-page-shape-item">
+
+            </div>
+        </div>
+        <div class="container">
+            <div class="header-page-content">
+                <h1>جزئیات محصول</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="product-details-section pt-100 pb-70 bg-black">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-sm-12 col-md-12 col-lg-5 pb-30">
+                <div class="product-details-item">
+                    <div class="product-details-slider">
+                        <div class="product-details-for popup-gallery">
+                            <div class="product-for-item">
+                                <a href="{{single_item.image.url}}"><img src={{single_item.image.url}} alt="product"></a>
+                            </div>
+                            <div class="product-for-item">
+                                <a href="{{single_item.gallery1.url}}"><img src={{single_item.gallery1.url}} alt="product"></a>
+                            </div>
+                            <div class="product-for-item">
+                                <a href="{{single_item.gallery2.url}}"><img src={{single_item.gallery2.url}} alt="product"></a>
+                            </div>
+                        </div>
+                        <div class="product-details-nav">
+                            <div class="product-nav-item">
+                                <div class="product-nav-item-inner">
+                                    <img src={{single_item.image.url}} alt="product">
+                                </div>
+                            </div>
+                            <div class="product-nav-item">
+                                <div class="product-nav-item-inner">
+                                    <img src={{single_item.gallery1.url}} alt="product">
+                                </div>
+                            </div>
+                            <div class="product-nav-item">
+                                <div class="product-nav-item-inner">
+                                    <img src={{single_item.gallery2.url}} alt="product">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-6 pb-30">
+                <div class="product-details-item">
+                    <div class="product-details-caption">
+                        <div class="product-status product-status-danger mb-20">
+                            جدید
+                        </div>
+                        <h3 class="mb-20 color-white">{{single_item.titel}}</h3>
+ 
+                        <div class="product-details-price mb-20">
+                            <h4 style="color: red;">{{ single_item.price|comma_seprator}} تومان</h4>
+                        </div>
+                        <div class="product-details-para mb-20">
+                        <p style="font-weight: bold;font-size: 22px;">مواد تشکیل دهنده:<p>
+                            <p>{{single_item.materials}}</p>
+                        </div>
+                    <hr style="color: aliceblue;">
+                    <div class="product-details-para mb-20">
+                        <p style="font-weight: bold;font-size: 22px;">توضیحات:<p>
+                            <p>{{single_item.description}}</p>
+                        </div>
+                        
+                        <div class="product-action-info mb-20">
+                            <div class="d-flex flex-wrap align-items-center
+                                product-quantity">
+                                {% if single_item.is_available > 0  %}        
+                                 {% if in_cart %}
+                                 <a href="#" style="background-color: rgb(17, 219, 47); color: black;"  class="btn btn-warning">
+                                    این محصول در سبد موجود است
+                                    
+                                </a>
+                                 {% else %}
+                                <a href="{% url 'add_cart' single_item.id %}" class="btn btn-icon product-quantity-item">
+                                    خرید آنلاین
+                                    <i class="flaticon-shopping-cart-black-shape"></i>
+                                </a>
+
+                                {% endif %}
+                                {% else %}
+                                <p style="color:white; background-color: red; font-size: 22px;font-weight: bold; padding: 5px;">این آیتم در حال حاضر موجود نمی باشد</p>
+                                {% endif %}
+                                
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="product-details-tab below-border">
+        <ul class="product-details-tab-list">
+
+            <li class="active" data-product-tab-list="2" >نطرات <span>({{comment_count}})</span></li>
+        </ul>
+
+            </div>
+            {% for comment in comments  %}
+            
+            
+            <div class="product-tab-information-item" data-product-details-tab="2">
+                <div class="product-review-list">
+                    <div class="testimonial-carousel-item bg-main product-review-item">
+                        <p class="carousel-para">{{comment.message}}</p>
+                        <div class="carousel-info-grid">
+                            <div class="carousel-thumb">
+                                <img src="{% static 'images/user.jpg' %}" alt="client">
+                            </div>
+                            <div class="carousel-info text-end">
+                                <div class="review-star">
+                                    <ul class="justify-content-end">
+                                        <li class="full-star"><i class="flaticon-star-1"></i></li>
+                                        <li class="full-star"><i class="flaticon-star-1"></i></li>
+                                        <li class="full-star"><i class="flaticon-star-1"></i></li>
+                                        <li class="full-star"><i class="flaticon-star-1"></i></li>
+                                        <li class="full-star"><i class="flaticon-star-1"></i></li>
+                                    </ul>
+                                </div>
+                                <h3 class="carousel-name"> {{comment.full_name}}</h3>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                <div class="product-review-area">
+                    <div class="sub-section-title">
+                        <h3 class="color-white">اضافه کردن نظر</h3>
+                    </div>
+                    
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="comment-input-area">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6 col-lg-6">
+                                    <div class="form-group mb-20">
+                                        <div class="input-group">
+                                            <input type="text" name="full_name" id="name" class="form-control" placeholder="نام*">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-lg-6">
+                                    <div class="form-group mb-20">
+                                        <div class="input-group">
+                                            <input type="text" name="email" id="emal" class="form-control" placeholder="ایمیل*">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                    <div class="form-group mb-20">
+                                        <div class="input-group">
+                                            <textarea name="message" class="form-control" id="message" rows="5" placeholder="اضافه کردن نظر*"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+  
+                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                <button class="btn full-width">ارسال نظر </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+               
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+                        
+{% endblock content %}
+</body>
+</html>

@@ -1,0 +1,13 @@
+DEBUG = True
+ALLOWED_HOSTS = []
+
+
+#db
+ENGINE = ''
+NAME = ''
+USER= ''
+PASSWORD= ''
+HOST= ''
+PORT= ''
+
+FILE_UPLOAD_MAX_MEMORY_SIZE = 2 * 1024 * 1024 

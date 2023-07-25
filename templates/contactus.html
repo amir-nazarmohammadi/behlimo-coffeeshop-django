@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="contact-us-section pt-100 pb-70 bg-black">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-4 pb-30">
+                <div class="contact-item">
+                    <div class="contact-item-title text-center">
+                        <h3 class="color-white">اطلاعات تماس</h3>
+                    </div>
+                    <div class="contact-item-info">
+                  
+                        <div class="contact-info-list">
+                            <h3 style="color: greenyellow;">تلفن</h3>
+                            <p><a href="tel:{{contactus.mobile}}">{{contactus.mobile}}</a> <br> <a href="{{contactus.phone}}">{{contactus.phone}}</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4 pb-30">
+                <div class="contact-item">
+                    <div class="contact-item-title text-center">
+                        <h3 class="color-white">شبکه های اجتماعی</h3>
+                    </div>
+                    <div class="contact-item-info">
+                        <div class="contact-info-list">
+                            <h3 style="color: greenyellow;">مارا در شبکه های اجتماعی دنبال کنید</h3>
+                            <ul class="social-list social-list-white">
+                                <li><a href="#"><i class="flaticon-telegram"></i></a></li>
+                                <li><a href="#"><i class="flaticon-whatsapp"></i></a></li>
+                                <li><a href="https://www.instagram.com/{{contactus.instagram}}"><i class="flaticon-instagram-1"></i></a></li>
+                            </ul>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4 pb-30">
+                <div class="contact-item">
+                    <div class="contact-item-title text-center">
+                        <h3 class="color-white">ایمیل</h3>
+                    </div>
+                    <div class="contact-item-info">
+                        <div class="contact-info-list">
+                            <h3 style="color: greenyellow;">آدرس ایمیل ما</h3>
+                            <p>{{contactus.email}}</p>
+                        </div>
+ 
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-12 col-md-6 col-lg-4 order-4 order-lg-0 pb-30">
+                <div class="contact-item">
+                    <div class="contact-item-title text-center">
+                        <h3 class="color-white">آدرس کافه </h3>
+                    </div>
+                    <div class="contact-item-info">
+                        <div class="contact-info-list">
+                            <h3 style="color: greenyellow;">آدرس</h3>
+                            <p>{{contactus.address}}</p>
+                        </div>
+      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="map-section p-tb-100 bg-black">
+    <div class="container">
+        <div class="google-map-content">
+            <iframe src="{{contactus.map_addres}}" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock content %}
+</body>
+
+</html>

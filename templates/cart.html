@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<section class="cart-section pt-100 pb-70 bg-black">
+    <div class="container">
+        <div class="cart-table cart-table-dark">
+         {% if not cart_items %} 
+         <h2 style="color: aliceblue;" class="text-center">  هیچ آیتمی در سبد خرید موجود نیست</h2>
+         <br>
+         <div class="text-center">
+            <a href="{% url 'menu' %}" class="btn btn-danger">رفتن به صفحه منو</a>
+         </div>
+         <br>
+         <br>
+         {% else %}  
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th>نام محصول</th>
+                        <th>تعداد سفارش</th>
+                        <th>قیمت تکی</th>
+                        <th>تعداد</th>
+                        <th>مجموع هزینه </th>
+                    </tr>
+                </thead>
+                {% for cart_item in cart_items %}
+                <tbody>
+                    
+                    <tr>
+                        <td class="cancel"><a href="{% url 'remove_cart_item' cart_item.menu.id %}"><i class='flaticon-cancel'></i></a></td>
+                        <td>
+                            <div class="product-table-info">
+                                <div class="product-table-thumb">
+                                    <img src="{{cart_item.menu.image.url}}" alt="product">
+                                </div>
+                            </div>
+                        </td>
+                        <td class="td-product-name">{{cart_item.menu.titel}}</td>
+                        <td>{{cart_item.quantity}}</td>
+                        <td>{{cart_item.menu.price}} تومان</td>
+                        <td>
+                            <div class="cart-quantity">
+                                <a href="{% url 'remove_cart' cart_item.menu.id %}" class="qu-btn dec">-</a>
+                                <input type="text" class="qu-input" value="{{cart_item.quantity}}">
+                                <a href="{% url 'add_cart' cart_item.menu.id %}" class="qu-btn inc">+</a>
+                            </div>
+                            
+                        </td>
+                        
+                        <td class="td-total-price"> {{cart_item.sub_total}}<span style="color:white; padding-right: 10px;" >تومان</span></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="row justify-content-between align-items-center mt-30">
+            <div class="col-sm-12 col-md-7 col-lg-5">
+        
+            </div>
+            
+            <div class="col-sm-12 col-md-4 col-lg-3">
+                <div class="cart-update cart-info-item">
+                    <a href="{% url 'menu' %}" class="btn full-width">
+                       ادامه خرید
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-md-8 col-lg-6 pb-30 offset-lg-3 offset-md-2">
+                <div class="cart-details mt-20">
+                    <h3 class="cart-details-title color-white">مجموع هزینه ها</h3>
+                    <div class="cart-total-box">
+
+                        <div class="cart-total-item cart-total-bold">
+                            <h4 class="color-white">جمع کل</h4>
+                            <p>{{total}} تومان</p>
+                        </div>
+                    </div>
+                    <a href="{% url 'checkout' %}" class="btn">ورود به صفحه پرداخت</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endblock content %}
+</body>
+</html>
